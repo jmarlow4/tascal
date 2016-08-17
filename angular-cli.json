@@ -23,7 +23,7 @@
     }
   },
   "defaults": {
-    "prefix": "app",
+    "prefix": "tscl",
     "sourceDir": "src",
     "styleExt": "css",
     "prefixInterfaces": false,
