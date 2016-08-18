@@ -6,6 +6,14 @@ import { RouterModule } from "@angular/router";
 
 import { AppComponent } from './app.component'
 import { OtherComponent } from "./other/other.component";
+import { AngularFireModule } from "angularfire2/angularfire2";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyANpyCsabDlJiuVNeo3eV-cqKszbUxTmYo",
+  authDomain: "tascal-db9ee.firebaseapp.com",
+  databaseURL: "https://tascal-db9ee.firebaseio.com",
+  storageBucket: "tascal-db9ee.appspot.com",
+}
 
 @NgModule({
   // - Components, directives, pipes
@@ -17,7 +25,8 @@ import { OtherComponent } from "./other/other.component";
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    RouterModule
+    RouterModule,
+    AngularFireModule.initializeApp(firebaseConfig),
   ],
 
   // - Services

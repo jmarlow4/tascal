@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   moduleId: module.id,
-  selector: 'tscl-other',
+  selector: 'tas-other',
   templateUrl: 'other.component.html',
   styleUrls: ['other.component.css']
 })

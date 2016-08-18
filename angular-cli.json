@@ -23,7 +23,7 @@
     }
   },
   "defaults": {
-    "prefix": "tscl",
+    "prefix": "tas",
     "sourceDir": "src",
     "styleExt": "css",
     "prefixInterfaces": false,

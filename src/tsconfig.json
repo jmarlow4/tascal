@@ -15,8 +15,12 @@
     "target": "es5",
     "inlineSources": true
   },
-
+  "types": [
+    "firebase",
+    "jasmine"
+  ],
   "files": [
+    "node_modules/angularfire2/angularfire2.d.ts",
     "main.ts",
     "typings.d.ts"
   ]
