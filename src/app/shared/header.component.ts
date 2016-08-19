@@ -11,10 +11,11 @@ import { AuthService } from "./auth.service";
       </div>
       <div class="nav-right">
         <div class="nav-item">
-          <button class="button is-primary">
-            <i class="icon-user"></i>
+          <button class="button is-primary" (click)="showLoginBox()">
+            <i [ngClass]="{'icon-user' : !loginBoxShown, 'icon-close' : loginBoxShown}"></i>
           </button>
         </div>
+        <tas-loginbox *ngIf="loginBoxShown"></tas-loginbox>
       </div>
     </nav>
   `,
@@ -22,7 +23,13 @@ import { AuthService } from "./auth.service";
 })
 export class HeaderComponent {
 
+  private loginBoxShown: boolean = false;
+
   constructor() {
+  }
+
+  showLoginBox() {
+    this.loginBoxShown = !this.loginBoxShown;
   }
 
 }

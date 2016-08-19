@@ -1,15 +1,16 @@
 import { NgModule } from  '@angular/core';
 import { BrowserModule } from '@angular/platform-browser'
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { ReactiveFormsModule, } from "@angular/forms";
 import { HttpModule } from "@angular/http";
-import { RouterModule } from "@angular/router";
 
-import { AngularFireModule } from "angularfire2/angularfire2";
+import { AngularFireModule, AuthMethods } from "angularfire2/angularfire2";
 
 import { AuthService } from "./shared/auth.service";
-import { AppComponent } from './app.component'
-import { OtherComponent } from "./other/other.component";
+import { AppComponent } from './app.component';
 import { HeaderComponent } from "./shared/header.component";
+import { LoginboxComponent } from "./shared/loginbox/loginbox.component";
+import { LoginformComponent } from "./shared/loginbox/shared/loginform.component";
+import { SignupformComponent } from "./shared/loginbox/shared/signupform.component";
 
 const firebaseConfig = {
   apiKey: "AIzaSyANpyCsabDlJiuVNeo3eV-cqKszbUxTmYo",
@@ -18,18 +19,27 @@ const firebaseConfig = {
   storageBucket: "tascal-db9ee.appspot.com",
 }
 
+const firebaseAuthConfig = {
+  method: AuthMethods.Popup,
+  remember: 'default'
+};
+
 @NgModule({
   // - Components, directives, pipes
-  declarations: [AppComponent, OtherComponent, HeaderComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    LoginboxComponent,
+    LoginformComponent,
+    SignupformComponent
+  ],
 
   // - Finished Modules like Router/Http/Forms or Third Party Modules
   imports: [
     BrowserModule,
-    FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    RouterModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
   ],
 
   // - Services

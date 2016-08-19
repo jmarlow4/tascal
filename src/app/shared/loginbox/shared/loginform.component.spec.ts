@@ -3,11 +3,11 @@
 import { By }           from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { addProviders, async, inject } from '@angular/core/testing';
-import { OtherComponent } from './other.component';
+import { LoginformComponent } from './loginform.component';
 
-describe('Component: Other', () => {
+describe('Component: Loginform', () => {
   it('should create an instance', () => {
-    let component = new OtherComponent();
+    let component = new LoginformComponent();
     expect(component).toBeTruthy();
   });
 });
