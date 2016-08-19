@@ -1,3 +1,3 @@
 export { HeaderComponent } from './header.component';
-export * from './user.interface';
-export * from './auth.service';
+export { User } from './user.interface';
+export { AuthService } from './auth.service';

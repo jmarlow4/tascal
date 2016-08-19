@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from "./shared/auth.service";
 
 @Component({
   moduleId: module.id,
@@ -7,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.css']
 })
 export class AppComponent {
+
+  constructor(authService: AuthService) {
+
+    // authService.signupUser({ email: 'flerp@derp.com', password: 'pw12345'});
+  }
+
   title = 'Tascal works!';
 }

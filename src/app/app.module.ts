@@ -4,9 +4,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { RouterModule } from "@angular/router";
 
+import { AngularFireModule } from "angularfire2/angularfire2";
+
+import { AuthService } from "./shared/auth.service";
 import { AppComponent } from './app.component'
 import { OtherComponent } from "./other/other.component";
-import { AngularFireModule } from "angularfire2/angularfire2";
+import { HeaderComponent } from "./shared/header.component";
 
 const firebaseConfig = {
   apiKey: "AIzaSyANpyCsabDlJiuVNeo3eV-cqKszbUxTmYo",
@@ -17,7 +20,7 @@ const firebaseConfig = {
 
 @NgModule({
   // - Components, directives, pipes
-  declarations: [AppComponent, OtherComponent],
+  declarations: [AppComponent, OtherComponent, HeaderComponent],
 
   // - Finished Modules like Router/Http/Forms or Third Party Modules
   imports: [
@@ -30,7 +33,7 @@ const firebaseConfig = {
   ],
 
   // - Services
-  providers: [],
+  providers: [AuthService],
 
   // - The target component
   bootstrap: [AppComponent],

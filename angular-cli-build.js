@@ -18,7 +18,9 @@ module.exports = function(defaults) {
       '@angular/**/*.+(js|js.map)',
       'angularfire2/**/*.+(js|js.map)',
       'firebase/**/*.+(js|js.map)',
-      'bulma/css/*.+(css|css.map)'
+      'bulma/css/*.+(css|css.map)',
+      'simple-line-icons/css/simple-line-icons.css',
+      'simple-line-icons/fonts/*'
     ]
   });
 };

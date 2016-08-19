@@ -21,6 +21,8 @@
   ],
   "files": [
     "node_modules/angularfire2/angularfire2.d.ts",
+    "node_modules/angularfire2/auth/auth.d.ts",
+    "node_modules/firebase/firebase.d.ts",
     "main.ts",
     "typings.d.ts"
   ]
