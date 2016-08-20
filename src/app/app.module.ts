@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser'
 import { ReactiveFormsModule, } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 
-import { AngularFireModule, AuthMethods } from "angularfire2/angularfire2";
+import {
+  AngularFireModule, AuthMethods, AuthProviders
+} from "angularfire2/angularfire2";
 
 import { AuthService } from "./shared/auth.service";
 import { AppComponent } from './app.component';
@@ -20,7 +22,8 @@ const firebaseConfig = {
 }
 
 const firebaseAuthConfig = {
-  method: AuthMethods.Popup,
+  provider: AuthProviders.Password,
+  method: AuthMethods.Password,
   remember: 'default'
 };
 
@@ -40,6 +43,7 @@ const firebaseAuthConfig = {
     ReactiveFormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
+
   ],
 
   // - Services

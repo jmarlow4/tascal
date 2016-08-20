@@ -12,6 +12,7 @@ export class AppComponent {
   constructor(authService: AuthService) {
 
     // authService.signupUser({ email: 'flerp@derp.com', password: 'pw12345'});
+
   }
 
   title = 'Tascal works!';
