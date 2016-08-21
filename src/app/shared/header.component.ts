@@ -25,7 +25,7 @@ import { AuthService } from "./auth.service";
             <div class="panel-block">
               <div class="content">
                 <p>Signed in as <strong>{{userEmail}}</strong></p>
-                <button class="button is-primary" (click)="logout()">
+                <button class="button is-primary is-fullwidth" (click)="logout()">
                   <i class="icon-logout"></i>&nbsp;Log Out
                 </button>
               </div>
@@ -61,13 +61,13 @@ export class HeaderComponent {
         this.isAuthenticated = state ? true : false;
 
         if (this.isAuthenticated) {
-          this.userEmail = state.auth['providerData'][0].email;
+          // this.userEmail = state.auth['providerData'][0].email;
+          console.log(state.auth);
+          this.userEmail = state.auth['email'];
         }
 
       }
     );
-
-    console.log(this.isAuthenticated);
   }
 
   logout() {

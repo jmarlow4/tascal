@@ -13,8 +13,13 @@ export class AuthService {
     return this.af.auth.createUser({email: user.email, password: user.password})
       // I know that invoking the method in this way is weird but I did it
       // so WebStorm won't give me anymore guff
-      ['then']((response) => console.log(response),
-            (error) => console.error(error))
+      ['then'](
+        (response) => {
+          console.log(response);
+          let users = this.af.database.list('/usernames');
+          users.push({username: user.username, userUid: response['uid']});
+
+        },(error) => console.error(error))
       ['then']((data) => this.af.auth.login({email: user.email, password: user.password}));
   }
 

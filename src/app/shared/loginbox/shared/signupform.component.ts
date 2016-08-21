@@ -29,8 +29,26 @@ import { AuthService } from "../../auth.service";
         </span>
       </p>
       
+      <label class="label" for="username">Username</label>
+      <p class="control">
+        <input #username
+          formControlName="username" 
+          class="input" 
+          type="text" 
+          id="username">
+        <i 
+          class="fa fa-warning" 
+          *ngIf="!username.pristine && username.errors != null && username.errors['noUsername']">
+        </i>
+        <span 
+          class="help is-danger" 
+          *ngIf="!username.pristine && username.errors != null && username.errors['noUsername']">
+          Invalid username. Must be alphanumeric.
+        </span>
+      </p>
+      
       <label class="label" for="password">Password</label>
-      <p class="control has-icon has-icon-right">
+      <p class="control">
         <input 
           formControlName="password" 
           class="input" 
@@ -90,6 +108,10 @@ export class SignupformComponent implements OnInit{
         Validators.required,
         this.isEmail
       ])],
+      username: [
+        '', Validators.required,
+        this.isValidUsername
+      ],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.compose([
         Validators.required,
@@ -99,10 +121,17 @@ export class SignupformComponent implements OnInit{
   }
 
   isEmail(control: FormControl): {[s: string]: boolean} {
-    if (!control.value.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+    if (!control.value.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]$/)) {
       return {noEmail: true};
     }
   }
+
+  isValidUsername(control: FormControl): {[s: string]: boolean} {
+    if (!control.value.match(/^[a-zA-Z0-9_]*$/)) {
+      return {noUsername: true};
+    }
+  }
+
 
   isEqualPassword(control: FormControl): {[s: string]: boolean} {
     if (!this.signupForm) {
