@@ -51,6 +51,7 @@ const barrels: string[] = [
   'app/lists',
   'app/tasks',
   'app/subtasks',
+  'app/user-home',
   /** @cli-barrel */
 ];
 
