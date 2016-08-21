@@ -1,5 +1,3 @@
 <tas-header></tas-header>
-<h1 class="title">
-  {{title}}
-</h1>
-<tas-other></tas-other>
+<p *ngFor="let list of lists | async">{{list.name}}</p>
+

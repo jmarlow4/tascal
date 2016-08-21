@@ -13,42 +13,28 @@ import { AuthService } from "../../auth.service";
     
       <label class="label" for="email">Email</label>
       <p class="control has-icon has-icon-right">
-        <input #email
+        <input
           formControlName="email" 
           class="input" 
-          type="email" 
+          type="email"
           id="email">
         <i 
-          class="fa fa-warning" 
-          *ngIf="!email.pristine && email.errors != null && email.errors['noEmail']">
+          class="fa icon-exclamation" 
+          *ngIf="!signupForm.find('email').pristine 
+          && signupForm.find('email').errors != null 
+          && signupForm.find('email').errors['noEmail']">
         </i>
         <span 
           class="help is-danger" 
-          *ngIf="!email.pristine && email.errors != null && email.errors['noEmail']">
+          *ngIf="!signupForm.find('email').pristine 
+          && signupForm.find('email').errors != null 
+          && signupForm.find('email').errors['noEmail']">
           Invalid mail address
         </span>
       </p>
       
-      <label class="label" for="username">Username</label>
-      <p class="control">
-        <input #username
-          formControlName="username" 
-          class="input" 
-          type="text" 
-          id="username">
-        <i 
-          class="fa fa-warning" 
-          *ngIf="!username.pristine && username.errors != null && username.errors['noUsername']">
-        </i>
-        <span 
-          class="help is-danger" 
-          *ngIf="!username.pristine && username.errors != null && username.errors['noUsername']">
-          Invalid username. Must be alphanumeric.
-        </span>
-      </p>
-      
       <label class="label" for="password">Password</label>
-      <p class="control">
+      <p class="control has-icon has-icon-right">
         <input 
           formControlName="password" 
           class="input" 
@@ -58,22 +44,22 @@ import { AuthService } from "../../auth.service";
       
       <label class="label" for="confirm-password">Confirm Password</label>
       <p class="control has-icon has-icon-right">
-        <input #confirmPassword
+        <input
           formControlName="confirmPassword" 
           class="input" 
           type="password" 
           id="confirm-password">
         <i 
-          class="fa fa-warning"
-          *ngIf="!confirmPassword.pristine 
-            && confirmPassword.errors != null 
-            && confirmPassword.errors['passwordsNotMatch']"
+          class="fa icon-exclamation"
+          *ngIf="!signupForm.find('confirmPassword').pristine 
+            && signupForm.find('confirmPassword').errors != null 
+            && signupForm.find('confirmPassword').errors['passwordsNotMatch']"
         ></i>
         <span 
           class="help is-danger" 
-          *ngIf="!confirmPassword.pristine 
-            && confirmPassword.errors != null 
-            && confirmPassword.errors['passwordsNotMatch']"
+          *ngIf="!signupForm.find('confirmPassword').pristine 
+            && signupForm.find('confirmPassword').errors != null 
+            && signupForm.find('confirmPassword').errors['passwordsNotMatch']"
         >
           Passwords do not match
         </span>
@@ -108,10 +94,6 @@ export class SignupformComponent implements OnInit{
         Validators.required,
         this.isEmail
       ])],
-      username: [
-        '', Validators.required,
-        this.isValidUsername
-      ],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.compose([
         Validators.required,
@@ -121,17 +103,10 @@ export class SignupformComponent implements OnInit{
   }
 
   isEmail(control: FormControl): {[s: string]: boolean} {
-    if (!control.value.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]$/)) {
+    if (!control.value.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]+$/)) {
       return {noEmail: true};
     }
   }
-
-  isValidUsername(control: FormControl): {[s: string]: boolean} {
-    if (!control.value.match(/^[a-zA-Z0-9_]*$/)) {
-      return {noUsername: true};
-    }
-  }
-
 
   isEqualPassword(control: FormControl): {[s: string]: boolean} {
     if (!this.signupForm) {

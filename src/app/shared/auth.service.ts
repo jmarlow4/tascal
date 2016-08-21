@@ -16,9 +16,6 @@ export class AuthService {
       ['then'](
         (response) => {
           console.log(response);
-          let users = this.af.database.list('/usernames');
-          users.push({username: user.username, userUid: response['uid']});
-
         },(error) => console.error(error))
       ['then']((data) => this.af.auth.login({email: user.email, password: user.password}));
   }

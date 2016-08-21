@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from "./shared/auth.service";
+import { AngularFire } from "angularfire2";
+import { Observable } from "rxjs";
 
 @Component({
   moduleId: module.id,
@@ -9,10 +11,10 @@ import { AuthService } from "./shared/auth.service";
 })
 export class AppComponent {
 
-  constructor(authService: AuthService) {
+  private lists: Observable<any[]>;
 
-    // authService.signupUser({ email: 'flerp@derp.com', password: 'pw12345'});
-
+  constructor(private af: AngularFire) {
+    this.lists = this.af.database.list('/lists');
   }
 
   title = 'Tascal works!';
