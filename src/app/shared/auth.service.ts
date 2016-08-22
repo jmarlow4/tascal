@@ -1,38 +1,53 @@
 import { Injectable } from '@angular/core';
 import { User } from "./user.interface";
-import { AngularFire } from "angularfire2/angularfire2";
+import { FirebaseAuth, FirebaseAuthState, AuthProviders } from "angularfire2/angularfire2";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class AuthService {
 
-  constructor(private af: AngularFire) {
+  private authState: FirebaseAuthState = null;
 
+  constructor(private firebaseAuth: FirebaseAuth, private router: Router) {
+    this.firebaseAuth.subscribe((state: FirebaseAuthState) => {
+      this.authState = state;
+    });
+  }
+
+  get auth() {
+    return this.firebaseAuth;
   }
 
   signupUser(user: User) {
-    return this.af.auth.createUser({email: user.email, password: user.password})
-      // I know that invoking the method in this way is weird but I did it
-      // so WebStorm won't give me anymore guff
+
+    return this.firebaseAuth.createUser({email: user.email, password: user.password})
+
+      // I know that invoking the 'then' method in this way is weird but I did it
+      // so WebStorm won't give me anymore error warnings
       ['then'](
         (response) => {
-          console.log(response);
-        },(error) => console.error(error))
-      ['then']((data) => this.af.auth.login({email: user.email, password: user.password}));
+          //Login after signing up
+          this.firebaseAuth.login({
+            email: user.email,
+            password: user.password
+          })
+          ['then']( () => this.router.navigate(['/app']));
+        },
+        (error) => console.error(error))
   }
 
   loginUser(user: User) {
-    this.af.auth.login({email: user.email, password: user.password})
-      ['then']((response) => console.log(response),
-            (error) => console.error(error));
+    this.firebaseAuth.login({email: user.email, password: user.password})
+      ['then'](
+        (response) => {
+          this.router.navigate(['/app']);
+        },
+        (error) => console.error(error));
   }
 
   logout() {
-    this.af.auth.logout();
-    // this.router.navigate(['/signin']);
-  }
-
-  getCurrentAuthState() {
-    return this.af.auth;
+    this.firebaseAuth.logout();
+    this.router.navigate(['/']);
   }
 
 }

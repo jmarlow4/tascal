@@ -13,6 +13,11 @@ import { HeaderComponent } from "./shared/header.component";
 import { LoginboxComponent } from "./shared/loginbox/loginbox.component";
 import { LoginformComponent } from "./shared/loginbox/shared/loginform.component";
 import { SignupformComponent } from "./shared/loginbox/shared/signupform.component";
+import { Routing } from "./app.routes";
+import { HomeComponent } from "./shared/home.component";
+import { UserHomeComponent } from "./user-home/user-home.component";
+import { AuthGuard } from "./shared/auth.guard";
+import { UnauthGuard } from "./shared/unauth.guard";
 
 const firebaseConfig = {
   apiKey: "AIzaSyANpyCsabDlJiuVNeo3eV-cqKszbUxTmYo",
@@ -34,7 +39,9 @@ const firebaseAuthConfig = {
     HeaderComponent,
     LoginboxComponent,
     LoginformComponent,
-    SignupformComponent
+    SignupformComponent,
+    HomeComponent,
+    UserHomeComponent,
   ],
 
   // - Finished Modules like Router/Http/Forms or Third Party Modules
@@ -43,11 +50,11 @@ const firebaseAuthConfig = {
     ReactiveFormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
-
+    Routing
   ],
 
   // - Services
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard, UnauthGuard],
 
   // - The target component
   bootstrap: [AppComponent],

@@ -57,15 +57,14 @@ export class HeaderComponent {
 
   constructor(private authService: AuthService) {
 
-    authService.getCurrentAuthState().subscribe( (state) => {
-        this.isAuthenticated = state ? true : false;
+    // Subscribe to the auth state directly to receive live changes.
+    authService.auth.subscribe( (state) => {
+
+        this.isAuthenticated = state !== null ? true : false;
 
         if (this.isAuthenticated) {
-          // this.userEmail = state.auth['providerData'][0].email;
-          console.log(state.auth);
           this.userEmail = state.auth['email'];
         }
-
       }
     );
   }
