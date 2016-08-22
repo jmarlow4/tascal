@@ -3,7 +3,7 @@ import {
   Validators, FormGroup, FormBuilder,
   FormControl
 } from "@angular/forms";
-import { AuthService } from "../../auth.service";
+import { AuthService } from "../auth.service";
 
 @Component({
   moduleId: module.id,

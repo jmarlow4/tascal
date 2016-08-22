@@ -18,17 +18,29 @@ import { AuthService } from "./auth.service";
             <i [ngClass]="{'icon-user' : !userBoxShown, 'icon-close' : userBoxShown}"></i>
           </button>
         </div>
-        <tas-loginbox *ngIf="userBoxShown && !isAuthenticated"></tas-loginbox>
+        <!--<tas-loginbox *ngIf="userBoxShown && !isAuthenticated"></tas-loginbox>-->
+        <div class="panel"
+          *ngIf="userBoxShown && !isAuthenticated">
+          <div class="panel-tabs">
+            <a [ngClass]="{'is-active': !isSigningUp}" (click)="setLoginState(false)">Login</a>
+            <a [ngClass]="{'is-active': isSigningUp}" (click)="setLoginState(true)">Sign Up</a>
+          </div>
+          <div class="panel-block">
+            <div class="content">
+              <tas-loginform *ngIf="!isSigningUp"></tas-loginform>
+              <tas-signupform *ngIf="isSigningUp"></tas-signupform>
+            </div>
+          </div>
+        </div>
         
-        <div *ngIf="userBoxShown && isAuthenticated">
-          <div class="panel profile-box">
-            <div class="panel-block">
-              <div class="content">
-                <p>Signed in as <strong>{{userEmail}}</strong></p>
-                <button class="button is-primary is-fullwidth" (click)="logout()">
-                  <i class="icon-logout"></i>&nbsp;Log Out
-                </button>
-              </div>
+        <div class="panel"
+          *ngIf="userBoxShown && isAuthenticated">
+          <div class="panel-block">
+            <div class="content">
+              <p>Signed in as <strong>{{userEmail}}</strong></p>
+              <button class="button is-primary is-fullwidth" (click)="logout()">
+                <i class="icon-logout"></i>&nbsp;Log Out
+              </button>
             </div>
           </div>
         </div>
@@ -36,7 +48,7 @@ import { AuthService } from "./auth.service";
     </nav>
   `,
   styles: [`
-    .profile-box {
+    .panel {
       position: absolute;
       top: 60px;
       right: 8px;
@@ -54,6 +66,7 @@ export class HeaderComponent {
   private isAuthenticated: boolean;
   private userEmail: string;
   private userBoxShown: boolean = false;
+  private isSigningUp: boolean = false;
 
   constructor(private authService: AuthService) {
 
@@ -67,6 +80,10 @@ export class HeaderComponent {
         }
       }
     );
+  }
+
+  setLoginState(bool: boolean) {
+    this.isSigningUp = bool;
   }
 
   logout() {

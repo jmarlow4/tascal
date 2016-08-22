@@ -10,9 +10,8 @@ import {
 import { AuthService } from "./shared/auth.service";
 import { AppComponent } from './app.component';
 import { HeaderComponent } from "./shared/header.component";
-import { LoginboxComponent } from "./shared/loginbox/loginbox.component";
-import { LoginformComponent } from "./shared/loginbox/shared/loginform.component";
-import { SignupformComponent } from "./shared/loginbox/shared/signupform.component";
+import { LoginformComponent } from "./shared/loginbox/loginform.component";
+import { SignupformComponent } from "./shared/loginbox/signupform.component";
 import { Routing } from "./app.routes";
 import { HomeComponent } from "./shared/home.component";
 import { UserHomeComponent } from "./user-home/user-home.component";
@@ -37,7 +36,6 @@ const firebaseAuthConfig = {
   declarations: [
     AppComponent,
     HeaderComponent,
-    LoginboxComponent,
     LoginformComponent,
     SignupformComponent,
     HomeComponent,
