@@ -1,0 +1,16 @@
+.panel {
+  position: absolute;
+  top: 60px;
+  right: 8px;
+  width: 250px;
+  background: white;
+}
+
+.content {
+  text-align: left;
+}
+
+/* Override default styling just for this button*/
+.button.is-primary:hover, .button.is-primary:focus, .button.is-primary.is-active {
+  background-color: #1fc8db;
+}

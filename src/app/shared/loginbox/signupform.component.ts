@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   Validators, FormGroup, FormBuilder,
   FormControl
 } from "@angular/forms";
-import { AuthService } from "../auth.service";
+import { AuthService } from "../auth/auth.service";
 
 @Component({
   moduleId: module.id,
   selector: 'tas-signupform',
   template: `
+    <div *ngIf="!isSigningUp">
     <form [formGroup]="signupForm" (ngSubmit)="onSignUp()">
     
       <label class="label" for="email">Email</label>
@@ -75,17 +76,24 @@ import { AuthService } from "../auth.service";
         <span>Sign Up</span>
       </button>
     </form>
-  `,
-  styles: []
+    </div>
+    <div *ngIf="isSigningUp">
+      <div class="loader big-loader"></div>
+    </div>
+  `
 })
 export class SignupformComponent implements OnInit{
 
   signupForm: FormGroup;
+  private isSigningUp:boolean = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService) { }
 
   onSignUp() {
-    this.authService.signupUser(this.signupForm.value);
+    this.isSigningUp = true;
+    this.authService.signupUser(this.signupForm.value)
+      .then( () => this.isSigningUp = false )
+      .catch( (err) => console.log(err) );
   }
 
   ngOnInit(): any {

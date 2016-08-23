@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild } from '@angular/core';
 import { User } from "./user.interface";
 import { FirebaseAuth, FirebaseAuthState, AuthProviders } from "angularfire2/angularfire2";
 import { Router } from "@angular/router";
@@ -37,17 +37,21 @@ export class AuthService {
   }
 
   loginUser(user: User) {
-    this.firebaseAuth.login({email: user.email, password: user.password})
+    return this.firebaseAuth.login({email: user.email, password: user.password})
       ['then'](
         (response) => {
           this.router.navigate(['/app']);
+          return response;
         },
         (error) => console.error(error));
   }
 
   logout() {
-    this.firebaseAuth.logout();
     this.router.navigate(['/']);
+    return new Promise((resolve, reject) => {
+      this.firebaseAuth.logout()
+      resolve(true);
+    });
   }
 
 }

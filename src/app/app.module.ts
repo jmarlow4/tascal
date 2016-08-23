@@ -7,16 +7,16 @@ import {
   AngularFireModule, AuthMethods, AuthProviders
 } from "angularfire2/angularfire2";
 
-import { AuthService } from "./shared/auth.service";
+import { AuthService } from "./shared/auth/auth.service";
 import { AppComponent } from './app.component';
-import { HeaderComponent } from "./shared/header.component";
+import { HeaderComponent } from "./shared/header/header.component";
 import { LoginformComponent } from "./shared/loginbox/loginform.component";
 import { SignupformComponent } from "./shared/loginbox/signupform.component";
 import { Routing } from "./app.routes";
 import { HomeComponent } from "./shared/home.component";
 import { UserHomeComponent } from "./user-home/user-home.component";
-import { AuthGuard } from "./shared/auth.guard";
-import { UnauthGuard } from "./shared/unauth.guard";
+import { AuthGuard } from "./shared/auth/auth.guard";
+import { UnauthGuard } from "./shared/auth/unauth.guard";
 
 const firebaseConfig = {
   apiKey: "AIzaSyANpyCsabDlJiuVNeo3eV-cqKszbUxTmYo",
