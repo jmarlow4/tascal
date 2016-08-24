@@ -18,6 +18,10 @@ export class AuthService {
     return this.firebaseAuth;
   }
 
+  get id() {
+    return this.authState['uid'];
+  }
+
   signupUser(user: User) {
 
     return this.firebaseAuth.createUser({email: user.email, password: user.password})

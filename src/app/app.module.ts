@@ -17,6 +17,12 @@ import { HomeComponent } from "./shared/home.component";
 import { UserHomeComponent } from "./user-home/user-home.component";
 import { AuthGuard } from "./shared/auth/auth.guard";
 import { UnauthGuard } from "./shared/auth/unauth.guard";
+import { ListsService } from "./lists/lists.service";
+import { TasksService } from "./tasks/tasks.service";
+import { SubtasksService } from "./subtasks/subtasks.service";
+import { ListsComponent } from "./lists/lists.component";
+import { TasksComponent } from "./tasks/tasks.component";
+import { SubtasksComponent } from "./subtasks/subtasks.component";
 
 const firebaseConfig = {
   apiKey: "AIzaSyANpyCsabDlJiuVNeo3eV-cqKszbUxTmYo",
@@ -40,6 +46,9 @@ const firebaseAuthConfig = {
     SignupformComponent,
     HomeComponent,
     UserHomeComponent,
+    ListsComponent,
+    TasksComponent,
+    SubtasksComponent
   ],
 
   // - Finished Modules like Router/Http/Forms or Third Party Modules
@@ -52,7 +61,14 @@ const firebaseAuthConfig = {
   ],
 
   // - Services
-  providers: [AuthService, AuthGuard, UnauthGuard],
+  providers: [
+    AuthService,
+    AuthGuard,
+    UnauthGuard,
+    ListsService,
+    TasksService,
+    SubtasksService
+  ],
 
   // - The target component
   bootstrap: [AppComponent],

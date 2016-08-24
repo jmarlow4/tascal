@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'tas-home',
   template: `
     <p>
-      home Works!
+      Homepage
     </p>
   `,
   styles: []
