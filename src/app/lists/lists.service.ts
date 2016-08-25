@@ -14,7 +14,7 @@ export class ListsService {
   constructor(private af: AngularFire) {
 
     this.af.auth.subscribe((auth) => {
-      this.userId = auth.uid;
+      this.userId = !!auth ? auth.uid : '';
     })
 
     const path = `/lists`;

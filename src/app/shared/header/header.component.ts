@@ -1,5 +1,6 @@
 import { Component, ViewChild, OnInit, Input } from '@angular/core';
 import { AuthService } from "../auth/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -20,7 +21,7 @@ export class HeaderComponent implements OnInit{
   private userEmail: string;
   private authenticated: boolean;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.authService.auth.subscribe( (authState) => {
