@@ -86,13 +86,17 @@ export class SignupformComponent implements OnInit{
 
   signupForm: FormGroup;
   private isSigningUp:boolean = false;
+  @Output() loggedIn = new EventEmitter();
 
   constructor(private fb: FormBuilder, private authService: AuthService) { }
 
   onSignUp() {
     this.isSigningUp = true;
     this.authService.signupUser(this.signupForm.value)
-      .then( () => this.isSigningUp = false )
+      .then( (auth) => {
+        this.isSigningUp = false;
+        this.loggedIn.emit(auth);
+      })
       .catch( (err) => console.log(err) );
   }
 

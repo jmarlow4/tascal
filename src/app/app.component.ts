@@ -1,19 +1,27 @@
 import { Component } from '@angular/core';
+import { AuthService } from "./shared/auth/auth.service";
+import { AngularFire } from "angularfire2";
 
 @Component({
   moduleId: module.id,
   selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css']
+  template: `
+  <tas-header></tas-header>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+  `
 })
 export class AppComponent {
 
-  // private lists: Observable<any[]>;
+  // private isAuthenticated: boolean;
 
   constructor() {
-    // this.lists = this.af.database.list('/lists');
-
-
+    //
+    // authService.auth.subscribe((state) => {
+    //   this.isAuthenticated = state !== null;
+    //   console.log(this.isAuthenticated);
+    // });
   }
 
 }

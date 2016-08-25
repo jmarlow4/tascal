@@ -9,13 +9,8 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
-  'angularfire2' : 'vendor/angularfire2',
-  'firebase' : 'vendor/firebase/firebase.js',
-  // 'firebase-auth' : 'vendor/firebase/firebase-auth.js',
-  // 'firebase-database' : 'vendor/firebase/firebase-database.js',
-  // 'firebase-browser' : 'vendor/firebase/firebase-browser.js',
-  // 'firebase-app' : 'vendor/firebase/firebase-app.js',
-  // 'firebase-storage' : 'vendor/firebase/firebase-storage.js',
+  'firebase': 'vendor/firebase/firebase.js',
+  'angularfire2': 'vendor/angularfire2'
 };
 
 /** User packages configuration. */

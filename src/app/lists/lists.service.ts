@@ -3,27 +3,34 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 
 import { List, ListInterface } from './list.model';
-import { AuthService } from "../shared/auth/auth.service";
 
 @Injectable()
 export class ListsService {
 
-  private lists: FirebaseListObservable<ListInterface[]>;
+  displayLists: FirebaseListObservable<ListInterface[]>;
+  private submitLists: FirebaseListObservable<ListInterface[]>;
   private userId: string;
 
-  constructor(private af: AngularFire, private authService: AuthService) {
+  constructor(private af: AngularFire) {
 
-    console.log(authService.id);
+    this.af.auth.subscribe((auth) => {
+      this.userId = auth.uid;
+    })
 
     const path = `/lists`;
-    const options = {
+    const displayOptions = {
       query: {
         orderByChild: 'ownerUserId',
-        toEqual: authService.id
+        equalTo: this.userId
       }
     }
 
-    this.lists = af.database.list(path, options);
+    console.log(displayOptions);
+
+    this.displayLists = af.database.list(path, displayOptions);
+    this.submitLists = af.database.list(path);
+
+    // this.submitLists.push(new List('dummy task', authService.id));
   }
 
 

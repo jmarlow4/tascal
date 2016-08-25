@@ -16,8 +16,8 @@ module.exports = function(defaults) {
       'reflect-metadata/**/*.+(ts|js|js.map)',
       'rxjs/**/*.+(js|js.map)',
       '@angular/**/*.+(js|js.map)',
-      'angularfire2/**/*.+(js|js.map)',
-      'firebase/**/*.+(js|js.map)',
+      'angularfire2/**/*.js',
+      'firebase/*.js',
       'bulma/css/*.+(css|css.map)',
       'simple-line-icons/css/simple-line-icons.css',
       'simple-line-icons/fonts/*'

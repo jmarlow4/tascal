@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit, Input } from '@angular/core';
 import { AuthService } from "../auth/auth.service";
 
 @Component({
@@ -10,24 +10,26 @@ import { AuthService } from "../auth/auth.service";
     '(document:click)': 'onClickOutsideUserBox($event)',
   }
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
   private isAuthenticated: boolean;
-  private userEmail: string;
   private userBoxShown: boolean = false;
   private isSigningUp: boolean = false;
   @ViewChild('userBox') userBox;
   @ViewChild('userBoxButton') userBoxButton;
+  private userEmail: string;
+  private authenticated: boolean;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService) { }
 
-    // Subscribe to the auth state directly to receive live changes.
-    authService.auth.subscribe( (state) => {
+  ngOnInit() {
+    this.authService.auth.subscribe( (authState) => {
 
-      this.isAuthenticated = state !== null ? true : false;
+      this.authenticated = !!authState;
 
-      if (this.isAuthenticated) {
-        this.userEmail = state.auth['email'];
+      if (!!authState) {
+        console.log(authState.auth['email']);
+        this.userEmail = authState.auth['email'];
       }
     });
 
@@ -38,6 +40,7 @@ export class HeaderComponent {
   }
 
   logout() {
+    this.authenticated = false;
     this.authService.logout();
   }
 
@@ -50,6 +53,10 @@ export class HeaderComponent {
       && !this.userBox.nativeElement.contains(event.target)
       && !this.userBoxButton.nativeElement.contains(event.target))
       this.userBoxShown = false;
+  }
+
+  setLoggedInState(authState) {
+    this.authenticated = true;
   }
 
 }

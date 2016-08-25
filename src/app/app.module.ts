@@ -71,7 +71,7 @@ const firebaseAuthConfig = {
   ],
 
   // - The target component
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 
 export class AppModule {}

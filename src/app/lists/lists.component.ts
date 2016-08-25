@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListsService } from "./lists.service";
+import { ListInterface } from "./list.model";
+import { FirebaseListObservable } from "angularfire2";
 
 @Component({
   moduleId: module.id,
@@ -9,7 +11,13 @@ import { ListsService } from "./lists.service";
 })
 export class ListsComponent implements OnInit {
 
-  constructor(listsService: ListsService) { }
+  private displayLists;
+
+  constructor(private listsService: ListsService) {
+
+    this.displayLists = this.listsService.displayLists;
+
+  }
 
   ngOnInit() {
   }

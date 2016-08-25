@@ -38,8 +38,9 @@ import { AuthService } from "../auth/auth.service";
 })
 export class LoginformComponent implements OnInit{
 
-  loginForm: FormGroup;
+  private loginForm: FormGroup;
   private isLoggingIn: boolean = false;
+  @Output() loggedIn = new EventEmitter();
 
   constructor(private fb: FormBuilder, private authService: AuthService) { }
 
@@ -53,8 +54,11 @@ export class LoginformComponent implements OnInit{
   onLogin() {
     this.isLoggingIn = true;
     this.authService.loginUser(this.loginForm.value)
-      .then( () => this.isLoggingIn = false)
-      .catch( (err) => console.log(err) );
+      .then( (auth) =>  {
+        this.isLoggingIn = false;
+        this.loggedIn.emit(auth);
+      })
+      .catch( (err) => console.error(err) );
   }
 
 }

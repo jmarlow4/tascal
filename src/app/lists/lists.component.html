@@ -1,3 +1,7 @@
-<div>
-  Lists
+<div class="list-container">
+  
+  <div class="card" *ngFor="let list of displayLists | async">
+    {{list.name}}
+  </div>
+  
 </div>

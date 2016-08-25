@@ -37,8 +37,8 @@ export class List implements ListInterface {
   ownerUserId: string;
   active: boolean = true;
   completed: boolean = false;
-  createdAt: number = FirebaseDatabase['ServerValue']['TIMESTAMP'];
-  sharedWith: Array<SharedWith>;
+  createdAt: number = new Date().getTime()
+  sharedWith: SharedWith[];
 
   constructor(name: string, ownerUserId: string) {
     this.name = name;

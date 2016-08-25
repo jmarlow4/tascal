@@ -6,7 +6,7 @@
     <div class="nav-item">
       <button #userBoxButton
         class="button"
-        [ngClass]="{'is-primary': isAuthenticated}"
+        [ngClass]="{'is-primary': authenticated}"
         (click)="showUserBox()">
           <i [ngClass]="{
             'icon-user' : !userBoxShown,
@@ -15,23 +15,23 @@
     </div>
     <div #userBox>
       <div class="panel"
-           *ngIf="userBoxShown && !isAuthenticated">
+           *ngIf="userBoxShown && !authenticated">
         <div class="panel-tabs">
           <a [ngClass]="{'is-active': !isSigningUp}" (click)="setLoginState(false)">Login</a>
           <a [ngClass]="{'is-active': isSigningUp}" (click)="setLoginState(true)">Sign Up</a>
         </div>
         <div class="panel-block">
           <div class="content">
-            <tas-loginform
+            <tas-loginform (loggedIn)="setLoggedInState($event)"
               *ngIf="!isSigningUp"></tas-loginform>
-            <tas-signupform
+            <tas-signupform (loggedIn)="setLoggedInState($event)"
               *ngIf="isSigningUp"></tas-signupform>
           </div>
         </div>
       </div>
       
       <div class="panel"
-           *ngIf="userBoxShown && isAuthenticated">
+           *ngIf="userBoxShown && authenticated">
         <div class="panel-block">
           <div class="content">
             <p>Signed in as <strong>{{userEmail}}</strong></p>
