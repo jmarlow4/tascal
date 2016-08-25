@@ -5,10 +5,13 @@
   <div class="nav-right">
     <div class="nav-item">
       <button #userBoxButton
-        class="button"
-        [ngClass]="{'is-primary': authenticated}"
-        (click)="showUserBox()">
-          <i [ngClass]="{
+              class="button"
+              [ngClass]="{
+              'is-primary': authenticated,
+              'is-loading': authenticating
+              }"
+              (click)="showUserBox()">
+        <i [ngClass]="{
             'icon-user' : !userBoxShown,
             'icon-close' : userBoxShown}"></i>
       </button>
@@ -22,10 +25,10 @@
         </div>
         <div class="panel-block">
           <div class="content">
-            <tas-loginform (loggedIn)="setLoggedInState($event)"
-              *ngIf="!isSigningUp"></tas-loginform>
-            <tas-signupform (loggedIn)="setLoggedInState($event)"
-              *ngIf="isSigningUp"></tas-signupform>
+            <tas-loginform (isAuthenticating)="showSpinner($event)"
+                           *ngIf="!isSigningUp"></tas-loginform>
+            <tas-signupform (isAuthenticating)="showSpinner($event)"
+                            *ngIf="isSigningUp"></tas-signupform>
           </div>
         </div>
       </div>

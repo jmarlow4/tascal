@@ -12,11 +12,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from "./shared/header/header.component";
 import { LoginformComponent } from "./shared/loginbox/loginform.component";
 import { SignupformComponent } from "./shared/loginbox/signupform.component";
-import { Routing } from "./app.routes";
 import { HomeComponent } from "./shared/home.component";
 import { UserHomeComponent } from "./user-home/user-home.component";
-import { AuthGuard } from "./shared/auth/auth.guard";
-import { UnauthGuard } from "./shared/auth/unauth.guard";
 import { ListsService } from "./lists/lists.service";
 import { TasksService } from "./tasks/tasks.service";
 import { SubtasksService } from "./subtasks/subtasks.service";
@@ -56,15 +53,12 @@ const firebaseAuthConfig = {
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
-    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
-    Routing
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
   ],
 
   // - Services
   providers: [
     AuthService,
-    AuthGuard,
-    UnauthGuard,
     ListsService,
     TasksService,
     SubtasksService

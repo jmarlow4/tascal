@@ -9,7 +9,7 @@ import { AuthService } from "../auth/auth.service";
   moduleId: module.id,
   selector: 'tas-signupform',
   template: `
-    <div *ngIf="!isSigningUp">
+    <div *ngIf="!working">
     <form [formGroup]="signupForm" (ngSubmit)="onSignUp()">
     
       <label class="label" for="email">Email</label>
@@ -77,7 +77,7 @@ import { AuthService } from "../auth/auth.service";
       </button>
     </form>
     </div>
-    <div *ngIf="isSigningUp">
+    <div *ngIf="working">
       <div class="loader big-loader"></div>
     </div>
   `
@@ -85,17 +85,18 @@ import { AuthService } from "../auth/auth.service";
 export class SignupformComponent implements OnInit{
 
   signupForm: FormGroup;
-  private isSigningUp:boolean = false;
-  @Output() loggedIn = new EventEmitter();
+  private working: boolean = false;
+  @Output() isAuthenticating = new EventEmitter();
 
   constructor(private fb: FormBuilder, private authService: AuthService) { }
 
   onSignUp() {
-    this.isSigningUp = true;
+    this.working = true;
+    this.isAuthenticating.emit(true);
     this.authService.signupUser(this.signupForm.value)
       .then( (auth) => {
-        this.isSigningUp = false;
-        this.loggedIn.emit(auth);
+        this.working = false;
+        this.isAuthenticating.emit(false);
       })
       .catch( (err) => console.log(err) );
   }

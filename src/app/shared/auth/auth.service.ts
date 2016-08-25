@@ -8,9 +8,9 @@ export class AuthService {
 
   public authState: FirebaseAuthState = null;
 
-  constructor(private af: AngularFire, private router: Router) {
+  constructor(private af: AngularFire) {
     this.af.auth.subscribe( (authState) => {
-      console.log(authState);
+      console.log('service.authState:', authState);
       this.authState = authState;
     });
   }
@@ -26,7 +26,7 @@ export class AuthService {
       ['then'](
         (response) => {
           this.loginUser(user);
-          // console.log(response)
+          return response
         },
         (error) => console.error(error))
   }
@@ -34,13 +34,12 @@ export class AuthService {
   loginUser(user: User) {
     return this.af.auth.login({email: user.email, password: user.password})
       ['then'](
-        (response) => this.router.navigateByUrl('/app'),
+        (response) => response,
         (error) => console.error(error));
   }
 
   logout() {
     this.af.auth.logout();
-    this.router.navigateByUrl('/');
   }
 
 }
