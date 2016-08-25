@@ -7,7 +7,7 @@ import { AuthService } from "../auth/auth.service";
   selector: 'tas-loginform',
   template: `
 
-    <div *ngIf="!isLoggingIn">
+    <div *ngIf="!authenticating">
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
     
       <label class="label">Email</label>
@@ -30,7 +30,7 @@ import { AuthService } from "../auth/auth.service";
       </button>
     </form>
     </div>
-    <div *ngIf="isLoggingIn">
+    <div *ngIf="authenticating">
       <div class="loader big-loader"></div>
     </div>
   `,
@@ -39,7 +39,8 @@ import { AuthService } from "../auth/auth.service";
 export class LoginformComponent implements OnInit{
 
   private loginForm: FormGroup;
-  private isLoggingIn: boolean = false;
+  private authenticating: boolean = false;
+  @Output() isLoggingIn = new EventEmitter();
   @Output() loggedIn = new EventEmitter();
 
   constructor(private fb: FormBuilder, private authService: AuthService) { }
@@ -52,11 +53,12 @@ export class LoginformComponent implements OnInit{
   }
 
   onLogin() {
-    this.isLoggingIn = true;
+    this.isLoggingIn.emit(true);
+    this.authenticating = true;
     this.authService.loginUser(this.loginForm.value)
       .then( (auth) =>  {
-        this.isLoggingIn = false;
-        this.loggedIn.emit(auth);
+        this.authenticating = false;
+        this.isLoggingIn.emit(false);
       })
       .catch( (err) => console.error(err) );
   }

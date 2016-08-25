@@ -13,13 +13,13 @@ import { Router } from "@angular/router";
 })
 export class HeaderComponent implements OnInit{
 
-  private isAuthenticated: boolean;
   private userBoxShown: boolean = false;
   private isSigningUp: boolean = false;
   @ViewChild('userBox') userBox;
   @ViewChild('userBoxButton') userBoxButton;
   private userEmail: string;
-  private authenticated: boolean;
+  private authenticated: boolean = false;
+  private authenticating: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -29,7 +29,6 @@ export class HeaderComponent implements OnInit{
       this.authenticated = !!authState;
 
       if (!!authState) {
-        console.log(authState.auth['email']);
         this.userEmail = authState.auth['email'];
       }
     });
@@ -41,8 +40,11 @@ export class HeaderComponent implements OnInit{
   }
 
   logout() {
-    this.authenticated = false;
-    this.authService.logout();
+    this.authService.logout()
+      .then( () => {
+        this.authenticated = false;
+        // this.router.navigate(['/']);
+      })
   }
 
   showUserBox() {
@@ -56,8 +58,8 @@ export class HeaderComponent implements OnInit{
       this.userBoxShown = false;
   }
 
-  setLoggedInState(authState) {
-    this.authenticated = true;
+  showSpinner(bool: boolean) {
+    this.authenticating = bool;
   }
 
 }

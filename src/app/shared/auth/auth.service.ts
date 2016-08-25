@@ -6,26 +6,28 @@ import { Router } from "@angular/router";
 @Injectable()
 export class AuthService {
 
-  public authState: FirebaseAuthState = null;
+  private authState: FirebaseAuthState = null;
 
   constructor(private af: AngularFire, private router: Router) {
     this.af.auth.subscribe( (authState) => {
-      console.log(authState);
+      console.log('service.authState:', authState);
       this.authState = authState;
     });
   }
-
   get auth() {
     return this.af.auth;
   }
-
+  get state() {
+    return this.authState;
+  }
   signupUser(user: User) {
     return this.af.auth.createUser({email: user.email, password: user.password})
       // I know that invoking the method in this way is weird but I did it
       // so WebStorm won't give me anymore guff
       ['then'](
         (response) => {
-          this.loginUser(user);
+          this.loginUser(user)
+            // .then( (auth) => this.router.navigate(['/app']));
           // console.log(response)
         },
         (error) => console.error(error))
@@ -34,13 +36,15 @@ export class AuthService {
   loginUser(user: User) {
     return this.af.auth.login({email: user.email, password: user.password})
       ['then'](
-        (response) => this.router.navigateByUrl('/app'),
+        (response) => response,
         (error) => console.error(error));
   }
 
   logout() {
-    this.af.auth.logout();
-    this.router.navigateByUrl('/');
+    return new Promise((resolve, reject) => {
+      this.af.auth.logout();
+      resolve(true);
+    });
   }
 
 }

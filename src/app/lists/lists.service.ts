@@ -3,6 +3,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 
 import { List, ListInterface } from './list.model';
+import { AuthService } from "../shared/auth/auth.service";
 
 @Injectable()
 export class ListsService {
@@ -14,7 +15,7 @@ export class ListsService {
   constructor(private af: AngularFire) {
 
     this.af.auth.subscribe((auth) => {
-      this.userId = !!auth ? auth.uid : '';
+      this.userId = auth.uid;
     })
 
     const path = `/lists`;
@@ -24,8 +25,6 @@ export class ListsService {
         equalTo: this.userId
       }
     }
-
-    console.log(displayOptions);
 
     this.displayLists = af.database.list(path, displayOptions);
     this.submitLists = af.database.list(path);
