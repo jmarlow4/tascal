@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from "./shared/auth/auth.service";
-import { AngularFire } from "angularfire2";
+import { FirebaseAuthState } from "angularfire2";
 
 @Component({
   moduleId: module.id,
@@ -8,20 +8,19 @@ import { AngularFire } from "angularfire2";
   template: `
   <tas-header></tas-header>
   <div class="container">
-    <router-outlet></router-outlet>
+    <tas-home *ngIf="!authState"></tas-home>
+    <tas-user-home *ngIf="!!authState" [authState]="authState"></tas-user-home>
   </div>
   `
 })
 export class AppComponent {
 
-  // private isAuthenticated: boolean;
+  private authState: FirebaseAuthState;
+  constructor(authService: AuthService) {
 
-  constructor() {
-    //
-    // authService.auth.subscribe((state) => {
-    //   this.isAuthenticated = state !== null;
-    //   console.log(this.isAuthenticated);
-    // });
+    authService.auth.subscribe((state) => {
+      this.authState = state;
+    });
   }
 
 }

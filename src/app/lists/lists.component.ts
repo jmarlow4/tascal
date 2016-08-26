@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ListsService } from "./lists.service";
 import { ListInterface } from "./list.model";
-import { FirebaseListObservable } from "angularfire2";
+import { FirebaseListObservable, AngularFire, FirebaseAuthState } from "angularfire2";
+import { AuthService } from "../shared/auth/auth.service";
 
 @Component({
   moduleId: module.id,
@@ -11,15 +12,24 @@ import { FirebaseListObservable } from "angularfire2";
 })
 export class ListsComponent implements OnInit {
 
-  private displayLists;
+  private userLists: FirebaseListObservable<ListInterface[]>;
+  private auth: FirebaseAuthState;
+  private path: string;
 
-  constructor(private listsService: ListsService) {
+  // inputs user ID
+  @Input('userId') uid: string;
 
-    this.displayLists = this.listsService.displayLists;
+  // outputs list ID
+  @Output() listId = new EventEmitter();
 
-  }
+  constructor(private listsService: ListsService) {}
 
   ngOnInit() {
+    this.userLists = this.listsService.getUserLists(this.uid);
+  }
+
+  emitListId(listId: string) {
+    this.listId.emit(listId)
   }
 
 }

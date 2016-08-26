@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   moduleId: module.id,
-  selector: 'tas-home',
+  selector: 'tas-task',
   template: `
-    <div class="content">
-      Welcome! Please sign in.
-    </div>
+    <p>
+      task Works!
+    </p>
   `,
   styles: []
 })
-export class HomeComponent implements OnInit {
+export class TaskComponent implements OnInit {
 
   constructor() { }
 

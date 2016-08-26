@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   moduleId: module.id,
-  selector: 'tas-home',
+  selector: 'tas-listform',
   template: `
-    <div class="content">
-      Welcome! Please sign in.
-    </div>
+    <p>
+      listform Works!
+    </p>
   `,
   styles: []
 })
-export class HomeComponent implements OnInit {
+export class ListformComponent implements OnInit {
 
   constructor() { }
 
