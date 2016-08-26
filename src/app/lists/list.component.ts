@@ -1,16 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ListInterface } from "./list.model";
 
 @Component({
   moduleId: module.id,
   selector: 'tas-list',
   template: `
-    <p>
-      list Works!
-    </p>
+    <div class="box">
+    {{list.name}}
+    </div>
   `,
-  styles: []
+  styles: [`
+    .box {
+      border-radius: 0;
+      padding: 10px;
+    }
+  `]
 })
 export class ListComponent implements OnInit {
+
+  @Input('list') list: ListInterface;
 
   constructor() { }
 

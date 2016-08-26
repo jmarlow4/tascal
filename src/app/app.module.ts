@@ -20,6 +20,12 @@ import { SubtasksService } from "./subtasks/subtasks.service";
 import { ListsComponent } from "./lists/lists.component";
 import { TasksComponent } from "./tasks/tasks.component";
 import { SubtasksComponent } from "./subtasks/subtasks.component";
+import { ListComponent } from "./lists/list.component";
+import { TaskComponent } from "./tasks/task.component";
+import { SubtaskComponent } from "./subtasks/subtask.component";
+import { SubtaskformComponent } from "./subtasks/subtaskform.component";
+import { TaskformComponent } from "./tasks/taskform.component";
+import { ListformComponent } from "./lists/listform.component";
 
 const firebaseConfig = {
   apiKey: "AIzaSyANpyCsabDlJiuVNeo3eV-cqKszbUxTmYo",
@@ -45,7 +51,13 @@ const firebaseAuthConfig = {
     UserHomeComponent,
     ListsComponent,
     TasksComponent,
-    SubtasksComponent
+    SubtasksComponent,
+    ListComponent,
+    TaskComponent,
+    SubtaskComponent,
+    ListformComponent,
+    TaskformComponent,
+    SubtaskformComponent,
   ],
 
   // - Finished Modules like Router/Http/Forms or Third Party Modules

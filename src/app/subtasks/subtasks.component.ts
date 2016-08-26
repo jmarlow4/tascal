@@ -3,8 +3,12 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'tas-subtasks',
-  templateUrl: 'subtasks.component.html',
-  styleUrls: ['subtasks.component.css']
+  template: `
+  <div>
+    {{taskId}}
+  </div>
+  `,
+  styles: []
 })
 export class SubtasksComponent implements OnInit {
 

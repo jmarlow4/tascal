@@ -11,14 +11,14 @@ import { AuthService } from "../auth/auth.service";
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
     
       <label class="label">Email</label>
-      <p class="control has-icon has-icon-right">
+      <div class="control has-icon has-icon-right">
         <input formControlName="email" class="input" type="email">
-      </p>
+      </div>
       
       <label class="label">Password</label>
-      <p class="control has-icon has-icon-right">
+      <div class="control has-icon has-icon-right">
         <input formControlName="password" class="input" type="password">
-      </p>
+      </div>
       
       <button 
         class="button is-primary is-fullwidth"

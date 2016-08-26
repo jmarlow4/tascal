@@ -3,23 +3,34 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 
 import { Subtask, SubtaskInterface } from './subtask.model';
-import { AuthService } from "../shared/auth/auth.service";
 
 @Injectable()
 export class SubtasksService {
 
   private subtasks: FirebaseListObservable<SubtaskInterface[]>;
+  private path: string;
 
-  constructor(af: AngularFire, authService: AuthService) {
+  constructor(private af: AngularFire) {
+    this.path = `/subtasks`;
+    this.subtasks = this.af.database.list(this.path);
+  }
 
-    const path = `/subtasks`;
-    const options = {
+  createSubtask(name: string, taskId: string) {
+    this.subtasks.push(new Subtask(name, taskId));
+  }
+
+  updateSubtask(key: string, subtaskData: SubtaskInterface){
+    this.subtasks.update(key, subtaskData);
+  }
+
+  getUserSubtasks(taskId: string) {
+    return this.af.database.list(this.path, {
       query: {
-
+        orderByChild: 'parentTaskId',
+        equalTo: taskId
       }
-    }
-
-    this.subtasks = af.database.list(path, options);
+    })
+      .map(items => items.sort((a, b) => b.createdAt - a.createdAt));
   }
 
 }

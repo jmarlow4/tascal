@@ -13,7 +13,7 @@ import { AuthService } from "../auth/auth.service";
     <form [formGroup]="signupForm" (ngSubmit)="onSignUp()">
     
       <label class="label" for="email">Email</label>
-      <p class="control has-icon has-icon-right">
+      <div class="control has-icon has-icon-right">
         <input
           formControlName="email" 
           class="input" 
@@ -32,19 +32,19 @@ import { AuthService } from "../auth/auth.service";
           && signupForm.find('email').errors['noEmail']">
           Invalid mail address
         </span>
-      </p>
+      </div>
       
       <label class="label" for="password">Password</label>
-      <p class="control has-icon has-icon-right">
+      <div class="control has-icon has-icon-right">
         <input 
           formControlName="password" 
           class="input" 
           type="password" 
           id="password">
-      </p>
+      </div>
       
       <label class="label" for="confirm-password">Confirm Password</label>
-      <p class="control has-icon has-icon-right">
+      <div class="control has-icon has-icon-right">
         <input
           formControlName="confirmPassword" 
           class="input" 
@@ -65,7 +65,7 @@ import { AuthService } from "../auth/auth.service";
           Passwords do not match
         </span>
             
-      </p>
+      </div>
       
       <button 
         class="button is-primary is-fullwidth"

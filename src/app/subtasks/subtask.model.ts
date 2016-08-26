@@ -34,7 +34,7 @@ export class Subtask implements SubtaskInterface {
   active: boolean = true;
   completed: boolean = false;
   whoCompleted: string = null;
-  createdAt: number = FirebaseDatabase['ServerValue']['TIMESTAMP'];
+  createdAt: number = new Date().getTime();
 
   constructor(name: string, parentTaskId: string) {
     this.name = name;

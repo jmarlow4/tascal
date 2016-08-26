@@ -7,8 +7,23 @@ import { AuthService } from "../shared/auth/auth.service";
 @Component({
   moduleId: module.id,
   selector: 'tas-lists',
-  templateUrl: 'lists.component.html',
-  styleUrls: ['lists.component.css']
+  template: `
+    <div class="list-container">
+      
+      <tas-listform 
+        [userId]="uid"
+        class="">
+      </tas-listform>
+      
+      <tas-list 
+        *ngFor="let list of userLists | async"
+        [list]="list"
+        (click)="emitListId(list.$key)">
+      </tas-list>
+      
+    </div>
+  `,
+  styles: []
 })
 export class ListsComponent implements OnInit {
 

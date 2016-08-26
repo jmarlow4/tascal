@@ -28,7 +28,7 @@ export class Task implements TaskInterface {
   parentListId: string;
   active: boolean = true;
   completed: boolean = false;
-  createdAt: number = FirebaseDatabase['ServerValue']['TIMESTAMP'];
+  createdAt: number = new Date().getTime();
 
   constructor(name: string, parentListId: string) {
     this.name = name;

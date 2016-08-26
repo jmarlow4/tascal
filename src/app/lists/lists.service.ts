@@ -4,24 +4,24 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from "rxjs/Subject";
 
 import { List, ListInterface } from './list.model';
-import { AuthService } from "../shared/auth/auth.service";
 
 @Injectable()
 export class ListsService {
 
-  private displayLists: FirebaseListObservable<ListInterface[]>;
-  private submitLists: FirebaseListObservable<ListInterface[]>;
-  // private userId = new Subject();
-  private userId: string;
+  private lists: FirebaseListObservable<ListInterface[]>;
   private path: string;
 
   constructor(private af: AngularFire) {
     this.path = `/lists`;
-    this.submitLists = this.af.database.list(this.path);
+    this.lists = this.af.database.list(this.path);
   }
 
-  createList(name: string, uid: string) {
-    this.af.database.list(this.path).push(new List(name, uid));
+  createList(list: ListInterface) {
+    this.lists.push(new List(list.name, list.ownerUserId));
+  }
+
+  updateList(key: string, listData: ListInterface){
+    this.lists.update(key, listData);
   }
 
   getUserLists(uid: string) {
@@ -31,12 +31,6 @@ export class ListsService {
         equalTo: uid
       }
     });
+      // .map(items => items.sort((a, b) => b.createdAt - a.createdAt));
   }
-
-
-    // this.submitLists.push(new List('dummy task', authService.id));
-
-
-
-
 }

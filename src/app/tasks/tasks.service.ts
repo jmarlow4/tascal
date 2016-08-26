@@ -3,23 +3,33 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 
 import { Task, TaskInterface } from './task.model';
-import { AuthService } from "../shared/auth/auth.service";
 
 @Injectable()
 export class TasksService {
 
   private tasks: FirebaseListObservable<TaskInterface[]>;
+  private path: string;
 
-  constructor(af: AngularFire, authService: AuthService) {
-
-    const path = `/tasks`;
-    const options = {
-      query: {
-
-      }
-    }
-
-    this.tasks = af.database.list(path, options);
+  constructor(private af: AngularFire) {
+    this.path = `/tasks`;
+    this.tasks = this.af.database.list(this.path);
   }
 
+  createTask(name: string, listId: string) {
+    this.tasks.push(new Task(name, listId));
+  }
+
+  updateTask(key: string, taskData: TaskInterface){
+    this.tasks.update(key, taskData);
+  }
+
+  getUserTasks(listId: string) {
+    return this.af.database.list(this.path, {
+      query: {
+        orderByChild: 'parentListId',
+        equalTo: listId
+      }
+    })
+      .map(items => items.sort((a, b) => b.createdAt - a.createdAt));
+  }
 }

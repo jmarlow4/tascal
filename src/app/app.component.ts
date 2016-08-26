@@ -7,11 +7,19 @@ import { FirebaseAuthState } from "angularfire2";
   selector: 'app-root',
   template: `
   <tas-header></tas-header>
-  <div class="container">
-    <tas-home *ngIf="!authState"></tas-home>
-    <tas-user-home *ngIf="!!authState" [authState]="authState"></tas-user-home>
+  <div class="section">
+    <div class="container">
+      <tas-home *ngIf="!authState"></tas-home>
+      <tas-user-home *ngIf="!!authState" [authState]="authState"></tas-user-home>
+    </div>
   </div>
-  `
+  `,
+  styles: [`
+    .section {
+      background-color: transparent;
+      padding: 0px;
+    }
+  `]
 })
 export class AppComponent {
 

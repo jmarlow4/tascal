@@ -19,11 +19,11 @@ lists: [
 export interface ListInterface {
   $key?: string;
   name: string;
-  ownerUserId: string;
-  active: boolean;
-  completed: boolean;
-  createdAt: number;
-  sharedWith: SharedWith[];
+  ownerUserId?: string;
+  active?: boolean;
+  completed?: boolean;
+  createdAt?: number;
+  sharedWith?: SharedWith[];
 }
 
 export interface SharedWith {

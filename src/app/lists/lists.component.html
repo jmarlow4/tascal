@@ -1,9 +1,0 @@
-<div class="list-container">
-  
-  <div class="card"
-       *ngFor="let list of userLists | async"
-       (click)="emitListId(list.$key)">
-    {{list.name}}
-  </div>
-  
-</div>
