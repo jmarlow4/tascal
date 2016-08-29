@@ -29,19 +29,7 @@ import { ListsService } from "./lists.service";
       </form>
     </div>
   `,
-  styles: [`
-    .box {
-      border-radius: 0;
-      padding: 10px;
-    }
-    form .control.has-addons .is-fullwidth {
-      width: 100%;
-    }
-    .title {
-      margin-bottom: 10px;
-      text-align: center;
-    }
-  `]
+  styles: []
 })
 export class ListformComponent implements OnInit {
 

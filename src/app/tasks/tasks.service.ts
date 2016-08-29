@@ -15,21 +15,27 @@ export class TasksService {
     this.tasks = this.af.database.list(this.path);
   }
 
-  createTask(name: string, listId: string) {
-    this.tasks.push(new Task(name, listId));
+  createTask(task: TaskInterface, parentListId: string) {
+    return this.tasks.push(new Task(task.name, parentListId));
   }
 
-  updateTask(key: string, taskData: TaskInterface){
-    this.tasks.update(key, taskData);
+  updateTask(taskData: TaskInterface){
+    let key = taskData.$key;
+    delete taskData.$key;
+    return this.tasks.update(key, taskData);
   }
 
-  getUserTasks(listId: string) {
+  deleteTask(task: TaskInterface) {
+    return this.tasks.remove(task);
+  }
+
+  getListsTasks(listId: string) {
     return this.af.database.list(this.path, {
       query: {
         orderByChild: 'parentListId',
         equalTo: listId
       }
     })
-      .map(items => items.sort((a, b) => b.createdAt - a.createdAt));
+      // .map(items => items.sort((a, b) => b.createdAt - a.createdAt));
   }
 }

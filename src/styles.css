@@ -11,3 +11,48 @@
   font-family: 'Chewy', cursive;
   color: #51575f;
 }
+
+.box {
+  border-radius: 0;
+  padding: 10px;
+}
+
+.selected-box .box {
+  background-color: #e5f6fd;
+}
+
+.box form .control.has-addons .is-fullwidth {
+  width: 100%;
+}
+.box .title {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.box-form {
+  height: 20px;
+}
+
+.box-form button {
+  position: relative;
+  bottom: 2px;
+}
+
+.box-edit-input {
+  all: unset;
+  height: 20px;
+  border-bottom: solid 1px #a1a1a1;
+  max-width: 48%;
+}
+
+.box .box-actions {
+  bottom: 22px;
+  position: relative;
+  width: 56px;
+  float: right;
+}
+
+.please-select {
+  text-align: center;
+  padding: 10px;
+}

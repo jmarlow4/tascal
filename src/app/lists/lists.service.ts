@@ -17,12 +17,19 @@ export class ListsService {
   }
 
   createList(list: ListInterface) {
-    this.lists.push(new List(list.name, list.ownerUserId));
+    return this.lists.push(new List(list.name, list.ownerUserId));
   }
 
-  updateList(key: string, listData: ListInterface){
-    this.lists.update(key, listData);
+  updateList(listData: ListInterface){
+    let key = listData.$key;
+    delete listData.$key;
+    return this.lists.update(key, listData);
   }
+
+  deleteList(list: ListInterface) {
+    return this.lists.remove(list);
+  }
+
 
   getUserLists(uid: string) {
     return this.af.database.list(this.path, {

@@ -15,22 +15,28 @@ export class SubtasksService {
     this.subtasks = this.af.database.list(this.path);
   }
 
-  createSubtask(name: string, taskId: string) {
-    this.subtasks.push(new Subtask(name, taskId));
+  createSubtask(subtask: SubtaskInterface, parentTaskId: string) {
+    return this.subtasks.push(new Subtask(subtask.name, parentTaskId));
   }
 
-  updateSubtask(key: string, subtaskData: SubtaskInterface){
-    this.subtasks.update(key, subtaskData);
+  updateSubtask(subtaskData: SubtaskInterface){
+    let key = subtaskData.$key;
+    delete subtaskData.$key;
+    return this.subtasks.update(key, subtaskData);
   }
 
-  getUserSubtasks(taskId: string) {
+  deleteSubtask(subtask: SubtaskInterface) {
+    return this.subtasks.remove(subtask);
+  }
+
+  getTasksSubtasks(taskId: string) {
     return this.af.database.list(this.path, {
       query: {
         orderByChild: 'parentTaskId',
         equalTo: taskId
       }
     })
-      .map(items => items.sort((a, b) => b.createdAt - a.createdAt));
+      // .map(items => items.sort((a, b) => b.createdAt - a.createdAt));
   }
 
 }

@@ -8,7 +8,7 @@ import { FirebaseAuthState } from "angularfire2";
   template: `
   <tas-header></tas-header>
   <div class="section">
-    <div class="container">
+    <div class="container is-fluid">
       <tas-home *ngIf="!authState"></tas-home>
       <tas-user-home *ngIf="!!authState" [authState]="authState"></tas-user-home>
     </div>

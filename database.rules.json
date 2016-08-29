@@ -4,6 +4,12 @@
     ".write": "auth != null",
     "lists": {
       ".indexOn": "ownerUserId"
+    },
+    "tasks": {
+      ".indexOn": "parentListId"
+    },
+    "subtasks": {
+      ".indexOn": "parentTaskId"
     }
   }
 }

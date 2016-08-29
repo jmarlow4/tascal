@@ -44,7 +44,7 @@ export class LoginformComponent implements OnInit{
 
   constructor(private fb: FormBuilder, private authService: AuthService) { }
 
-  ngOnInit():any {
+  ngOnInit() {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],

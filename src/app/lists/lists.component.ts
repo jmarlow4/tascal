@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FirebaseListObservable } from "angularfire2";
 import { ListsService } from "./lists.service";
 import { ListInterface } from "./list.model";
-import { FirebaseListObservable, AngularFire, FirebaseAuthState } from "angularfire2";
-import { AuthService } from "../shared/auth/auth.service";
 
 @Component({
   moduleId: module.id,
@@ -11,13 +10,14 @@ import { AuthService } from "../shared/auth/auth.service";
     <div class="list-container">
       
       <tas-listform 
-        [userId]="uid"
-        class="">
+        [userId]="uid">
       </tas-listform>
       
       <tas-list 
         *ngFor="let list of userLists | async"
+        [ngClass]="{'selected-box' : selectedList === list.$key}"
         [list]="list"
+        (unsetList)="emitListId(null)"
         (click)="emitListId(list.$key)">
       </tas-list>
       
@@ -28,8 +28,8 @@ import { AuthService } from "../shared/auth/auth.service";
 export class ListsComponent implements OnInit {
 
   private userLists: FirebaseListObservable<ListInterface[]>;
-  private auth: FirebaseAuthState;
   private path: string;
+  private selectedList: string;
 
   // inputs user ID
   @Input('userId') uid: string;
@@ -44,6 +44,7 @@ export class ListsComponent implements OnInit {
   }
 
   emitListId(listId: string) {
+    this.selectedList = listId;
     this.listId.emit(listId)
   }
 

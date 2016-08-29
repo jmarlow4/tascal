@@ -98,10 +98,10 @@ export class SignupformComponent implements OnInit{
         this.working = false;
         this.isAuthenticating.emit(false);
       })
-      .catch( (err) => console.log(err) );
+      .catch( (err) => console.error(err) );
   }
 
-  ngOnInit(): any {
+  ngOnInit() {
     this.signupForm = this.fb.group({
       email: ['', Validators.compose([
         Validators.required,

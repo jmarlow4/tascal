@@ -21,6 +21,7 @@ import { FirebaseAuthState } from "angularfire2";
       
       <tas-subtasks 
         class="column"
+        [listId]="listId"
         [taskId]="taskId">
       </tas-subtasks>
     </div>
